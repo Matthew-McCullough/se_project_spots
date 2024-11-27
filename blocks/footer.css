@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  color: #212121;
+  background-color: #fcf5e5;
+  opacity: 70%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.footer__copyright {
+  margin: 60px 0 60px;
+}
