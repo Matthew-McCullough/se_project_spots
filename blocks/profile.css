@@ -5,10 +5,11 @@
 }
 
 .profile__avatar {
+  object-fit: cover;
   height: 190px;
   width: 190px;
   margin-right: 20px;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .profile__column {
