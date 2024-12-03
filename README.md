@@ -51,3 +51,7 @@ Some ideas I have for improving this project include:
 This webpage is deployed to GitHub pages
 
 - Deployment Link: https://matthew-mccullough.github.io/se_project_spots/
+
+## Code Overview Video
+
+- Video Link: https://drive.google.com/file/d/1XiAyyL6rZrQqK8HucRpHRF0O1mMHMeWn/view?usp=sharing
