@@ -38,7 +38,7 @@ const editModalDescriptionInput = editModal.querySelector(
   "#profile-description-input"
 );
 
-const cardModal = document.querySelector("add-card-modal");
+const cardModal = document.querySelector("#add-card-modal");
 const cardModalCloseButton = cardModal.querySelector(".modal__close");
 
 const cardTemplate = document.querySelector("#card-template");
