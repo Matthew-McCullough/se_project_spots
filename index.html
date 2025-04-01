@@ -53,17 +53,19 @@
       <footer class="footer">
         <p class="footer__copyright">2024 &copy; Spots</p>
       </footer>
+
       <div class="modal" id="edit-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-btn"></button>
           <h2 class="modal__title">Edit profile</h2>
-          <form name="edit-profile" class="modal__form">
+          <form name="edit-profile" class="modal__form" id="edit-profile-form">
             <label for="profile-name-input" class="modal__label">
               Name
               <input
                 id="profile-name-input"
                 type="text"
                 class="modal__input"
+                name="name"
                 placeholder="Type your name"
               />
             </label>
@@ -73,7 +75,38 @@
                 id="profile-description-input"
                 type="text"
                 class="modal__input"
+                name="description"
                 placeholder="Describe yourself"
+              />
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal" id="add-card-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn"></button>
+          <h2 class="modal__title">New post</h2>
+          <form name="edit-profile" class="modal__form" id="add-card-form">
+            <label for="card-link-input" class="modal__label">
+              Image link
+              <input
+                id="add-card-link-input"
+                type="url"
+                class="modal__input"
+                name="link"
+                placeholder="Paste a link to the picture"
+              />
+            </label>
+            <label for="add-card-name-input" class="modal__label">
+              Caption
+              <input
+                id="add-card-name-input"
+                type="text"
+                class="modal__input"
+                name="name"
+                placeholder="Type your caption"
               />
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
