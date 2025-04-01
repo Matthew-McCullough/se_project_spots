@@ -82,10 +82,13 @@ function handleEditFormSubmit(evt) {
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+  // TODO - make image appear when adding card
   console.log(cardNameInput.value);
   console.log(cardLinkInput.value);
   const inputValues = { name: cardNameInput.value, Link: cardLinkInput.value };
   const cardElement = getCardElement(inputValues);
+
+  // TODO - Make sure card appears at the top of the list
   cardsList.append(cardElement);
 }
 
