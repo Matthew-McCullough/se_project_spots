@@ -24,19 +24,46 @@
 }
 
 .card__like-btn {
-  background-image: url(../images/heart.svg);
   width: 23px;
   height: 20px;
+  background: transparent url("../images/like-icon-dark.svg") center no-repeat;
   border: none;
   background-color: transparent;
-  opacity: 40%;
-  margin: 12px 0 0;
+  opacity: 0.4;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
 }
 
 .card__like-btn:hover {
-  opacity: 100%;
-  transition: 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.card__like-btn_liked {
+  background-image: url(../images/like-icon-liked.svg);
+  opacity: 1;
+}
+
+.card__like-btn_liked:hover {
+  background-image: url(../images/like-icon-liked-hover.svg);
+}
+
+.card__delete-btn {
+  background: url(../images/delete-icon.svg) center no-repeat;
+  position: relative;
+  top: 0px;
+  right: 100px;
+  bottom: 50px;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* I need help correctly positoning the delete/trash can icon so it lines up in the upper right corner overlayed on top of the card. */
+.card__delete-btn:hover {
+  background: url(../images/delete-icon-hover.svg) center no-repeat;
 }
 
 @media screen and (max-width: 627px) {

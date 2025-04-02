@@ -53,17 +53,30 @@ function getCardElement(data) {
     .cloneNode(true);
 
   const cardNameEl = cardElement.querySelector(".card__title");
-
   const cardImageEl = cardElement.querySelector(".card__image");
+  const cardLikeButton = cardElement.querySelector(".card__like-btn");
+  const cardDeleteButton = cardElement.querySelector(".card__delete-btn");
+  // I think I selected correct selector string above for delete icon^^^^
 
   cardNameEl.textContent = data.name;
-
   cardImageEl.src = data.link;
-
   cardImageEl.alt = data.name;
+
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.toggle("card__like-btn_liked");
+  });
 
   return cardElement;
 }
+
+// function getCardElement(data) {
+//   const cardElement = cardTemplate.content
+//     .querySelector(".card")
+//     .cloneNode(true);
+
+//   cardDeleteButton.addEventListener("click," () => {
+//     cardDeleteButton.classList.toggle("card__delete-btn");
+// });
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -82,14 +95,19 @@ function handleEditFormSubmit(evt) {
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  // TODO - make image appear when adding card
-  console.log(cardNameInput.value);
-  console.log(cardLinkInput.value);
-  const inputValues = { name: cardNameInput.value, Link: cardLinkInput.value };
+
+  const inputValues = {
+    name: cardNameInput.value,
+    link: cardLinkInput.value,
+  };
+
   const cardElement = getCardElement(inputValues);
 
-  // TODO - Make sure card appears at the top of the list
-  cardsList.append(cardElement);
+  cardsList.prepend(cardElement);
+
+  cardForm.reset();
+
+  closeModal(cardModal);
 }
 
 editProfileButton.addEventListener("click", () => {

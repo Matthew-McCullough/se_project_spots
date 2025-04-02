@@ -37,13 +37,13 @@
   right: 50px;
   width: 40px;
   height: 40px;
-  background: transparent url(../images/Close\ Icon\ V1.svg) center no-repeat;
+  background: transparent url("../images/Close\ Icon\ V1.svg") center no-repeat;
   border: none;
   cursor: pointer;
 }
 
 .modal__close-btn:hover {
-  background: transparent url(../images/Close\ Icon\ V2.svg) center no-repeat;
+  background: transparent url("../images/Close\ Icon\ V2.svg") center no-repeat;
   transition: 0.5s ease-in-out;
 }
 
