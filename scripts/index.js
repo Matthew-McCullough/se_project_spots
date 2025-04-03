@@ -37,7 +37,9 @@ const editModalNameInput = editModal.querySelector("#profile-name-input");
 const editModalDescriptionInput = editModal.querySelector(
   "#profile-description-input"
 );
-
+const previewModal = document.querySelector("#preview-modal");
+const previewModalImageEl = previewModal.querySelector(".modal__image");
+const previewModalCaption = previewModal.querySelector(".modal__caption");
 const cardModal = document.querySelector("#add-card-modal");
 const cardForm = cardModal.querySelector(".modal__form");
 const cardModalCloseButton = cardModal.querySelector(".modal__close-btn");
@@ -56,7 +58,6 @@ function getCardElement(data) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardLikeButton = cardElement.querySelector(".card__like-btn");
   const cardDeleteButton = cardElement.querySelector(".card__delete-btn");
-  // I think I selected correct selector string above for delete icon^^^^
 
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
@@ -66,17 +67,16 @@ function getCardElement(data) {
     cardLikeButton.classList.toggle("card__like-btn_liked");
   });
 
+  cardDeleteButton.addEventListener("click", (evt) => {
+    evt.target.closet(".card").remove();
+  });
+
+  cardImageEl.addEventListener("Click," () => {
+    openModal(previewModal);
+  });
+
   return cardElement;
 }
-
-// function getCardElement(data) {
-//   const cardElement = cardTemplate.content
-//     .querySelector(".card")
-//     .cloneNode(true);
-
-//   cardDeleteButton.addEventListener("click," () => {
-//     cardDeleteButton.classList.toggle("card__delete-btn");
-// });
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
