@@ -37,6 +37,7 @@
 .modal__content_type_preview {
   padding: 0;
   background-color: transparent;
+  width: unset;
 }
 
 .modal__image {
@@ -45,16 +46,19 @@
   max-width: 80vw;
   max-width: 80vh;
   border-radius: 8px;
+  height: 661px;
+  top: 497px;
+  left: 8px;
 }
 
 .modal__caption {
   display: flex;
   font-weight: 500;
   font-size: 20px;
-  line-height: 1.2;
+  line-height: 1.5;
   margin: 0;
   padding: 4px 8px;
-  width: 135px;
+  width: fit-content;
   height: 32px;
   background-color: rgba(33, 33, 33, 1);
   color: rgba(255, 255, 255, 1);
@@ -76,8 +80,6 @@
 
 .modal__close_type_preview {
   background-image: url(../images/close-light.svg);
-  top: 0;
-  right: -52.5px;
   opacity: 1;
 }
 
