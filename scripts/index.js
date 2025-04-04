@@ -23,6 +23,10 @@ const initialCards = [
     name: "Mountain house",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
   },
+  {
+    name: "A bridge across the bay",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+  },
 ];
 
 const editProfileButton = document.querySelector(".profile__edit-btn");
@@ -68,11 +72,14 @@ function getCardElement(data) {
   });
 
   cardDeleteButton.addEventListener("click", (evt) => {
-    evt.target.closet(".card").remove();
+    evt.target.closest(".card").remove();
   });
 
-  cardImageEl.addEventListener("Click," () => {
+  cardImageEl.addEventListener("click", () => {
     openModal(previewModal);
+    previewModalCaption.textContent = data.name;
+    previewModalImageEl.src = data.link;
+    previewModalImageEl.alt = data.name;
   });
 
   return cardElement;
