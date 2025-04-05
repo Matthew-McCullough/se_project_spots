@@ -8,6 +8,7 @@
   object-fit: cover;
   display: block;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .card__content {
