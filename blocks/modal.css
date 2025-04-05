@@ -44,11 +44,8 @@
   width: 100%;
   object-fit: contain;
   max-width: 80vw;
-  max-width: 80vh;
+  max-height: 80vh;
   border-radius: 8px;
-  height: 661px;
-  top: 497px;
-  left: 8px;
 }
 
 .modal__caption {
