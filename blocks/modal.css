@@ -14,6 +14,9 @@
   visibility: hidden;
   padding: 0 10px;
   visibility: hidden;
+
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 .modal__form {
@@ -22,6 +25,9 @@
 
 .modal_opened {
   visibility: visible;
+
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 .modal__content {
@@ -86,7 +92,6 @@
 
 .modal__close-btn:hover {
   background: transparent url(../images/Close\ Icon\ V2.svg) center no-repeat;
-  transition: 0.5s ease-in-out;
 }
 
 .modal__title {
