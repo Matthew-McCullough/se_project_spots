@@ -38,6 +38,11 @@
   border-radius: 8px;
 }
 
+.modal__image-container {
+  padding: 16px;
+  position: relative;
+}
+
 .modal__content_type_preview {
   padding: 0;
   background-color: transparent;
@@ -82,10 +87,10 @@
 .modal__close-btn_type_preview {
   background-image: url(../images/close-light.svg);
   opacity: 1;
-  right: unset;
+  right: -32px;
   left: calc(100%);
   bottom: calc(100%);
-  top: unset;
+  top: 0;
 }
 
 .modal__close-btn:hover {
