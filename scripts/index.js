@@ -121,6 +121,7 @@ editProfileButton.addEventListener("click", () => {
   resetValidation(editFormElement, [
     editModalNameInput,
     editModalDescriptionInput,
+    settings,
   ]);
   openModal(editModal);
 });
