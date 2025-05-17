@@ -9,7 +9,7 @@ const settings = {
 
 const showInputError = (formEl, inputEl, errorMsg, config) => {
   const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
-  errorMsgEl.textContent = errorMsg;
+  errorMsgEl.textContent = "";
   inputEl.classList.add(config.inputErrorClass);
 };
 
@@ -48,9 +48,9 @@ const disableButton = (buttonEl, config) => {
   buttonEl.classList.add(config.inactiveButtonClass);
 };
 
-const resetValidation = (formEl, inputList) => {
+const resetValidation = (formEl, inputList, config) => {
   inputList.forEach((input) => {
-    hideInputError(formEl, input);
+    hideInputError(formEl, input, config);
   });
 };
 
