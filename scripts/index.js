@@ -1,3 +1,10 @@
+import {
+  enableValidation,
+  validationConfig,
+  resetValidation,
+  disableButton,
+} from "./validation.js";
+
 const initialCards = [
   {
     name: "Val Thorens",
@@ -131,7 +138,7 @@ function handleAddCardSubmit(evt) {
   const cardElement = getCardElement(inputValues);
   cardsList.prepend(cardElement);
   cardForm.reset();
-  disableButton(cardSubmitButton, settings);
+  disableButton(cardSubmitButton, validationConfig);
   closeModal(cardModal);
 }
 
@@ -141,7 +148,7 @@ editProfileButton.addEventListener("click", () => {
   resetValidation(
     editFormElement,
     [editModalNameInput, editModalDescriptionInput],
-    settings
+    validationConfig
   );
   openModal(editModal);
 });
@@ -169,3 +176,5 @@ initialCards.forEach((item) => {
   const cardElement = getCardElement(item);
   cardsList.append(cardElement);
 });
+
+enableValidation(validationConfig);
