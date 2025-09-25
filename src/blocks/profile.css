@@ -28,7 +28,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
-  line-clamp: 3;
+  box-orient: vertical;
   -webkit-box-orient: vertical;
   max-width: 420px;
 }
@@ -45,6 +45,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
+  box-orient: vertical;
   -webkit-box-orient: vertical;
   max-width: 420px;
 }
