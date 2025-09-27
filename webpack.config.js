@@ -1,14 +1,14 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-module.exports = {
+export default {
   entry: {
     main: "./src/pages/index.js",
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve("./dist"),
     filename: "main.js",
     publicPath: "",
   },
@@ -17,7 +17,7 @@ module.exports = {
   devtool: "inline-source-map",
   stats: "errors-only",
   devServer: {
-    static: path.resolve(__dirname, "./dist"),
+    static: path.resolve("./dist"),
     compress: true,
     port: 8080,
     open: true,

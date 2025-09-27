@@ -15,4 +15,4 @@ const presets = [
   ],
 ];
 
-module.exports = { presets };
+export default { presets };
