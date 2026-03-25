@@ -18,11 +18,20 @@ const api = new Api({
   },
 });
 
+let handleConfirmDelete;
+let currentUserId;
+
 const editProfileButton = document.querySelector(".profile__edit-btn");
 const addProfileButton = document.querySelector(".profile__add-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileAvatar = document.querySelector(".profile__avatar");
+const profileAvatarEditButton = document.querySelector(
+  ".profile__avatar-edit-btn",
+);
+const profileAvatarEditIcon = document.querySelector(
+  ".profile__avatar-edit-icon",
+);
 
 const headerLogo = document.querySelector(".header__logo");
 const editProfileIcon = editProfileButton.querySelector("img");
@@ -32,6 +41,10 @@ headerLogo.src = logoImage;
 editProfileIcon.src = pencilImage;
 addProfileIcon.src = plusImage;
 
+if (profileAvatarEditIcon) {
+  profileAvatarEditIcon.src = pencilImage;
+}
+
 const editModal = document.querySelector("#edit-modal");
 const editFormElement = editModal.querySelector(".modal__form");
 const editModalCloseButton = editModal.querySelector(".modal__close-btn");
@@ -39,16 +52,28 @@ const editModalNameInput = editModal.querySelector("#profile-name-input");
 const editModalDescriptionInput = editModal.querySelector(
   "#profile-description-input",
 );
+
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaption = previewModal.querySelector(".modal__caption");
+const previewModalCloseButton = previewModal.querySelector(".modal__close-btn");
+
 const cardModal = document.querySelector("#add-card-modal");
 const cardForm = cardModal.querySelector(".modal__form");
 const cardSubmitButton = cardModal.querySelector(".modal__submit-btn");
 const cardModalCloseButton = cardModal.querySelector(".modal__close-btn");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
-const previewModalCloseButton = previewModal.querySelector(".modal__close-btn");
+
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarInput = avatarModal.querySelector("#avatar-input");
+const avatarCloseButton = avatarModal.querySelector(".modal__close-btn");
+
+const confirmModal = document.querySelector("#confirm-modal");
+const confirmDeleteForm = confirmModal.querySelector("#confirm-delete-form");
+const confirmCloseButton = confirmModal.querySelector(".modal__close-btn");
+const confirmCancelButton = confirmModal.querySelector(".modal__cancel-btn");
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
@@ -94,21 +119,28 @@ function getCardElement(data, userId) {
   });
 
   cardDeleteButton.addEventListener("click", () => {
-    api
-      .removeCard(data._id)
-      .then(() => {
-        cardElement.remove();
-      })
-      .catch((err) => {
-        console.error("Failed to delete card:", err);
-      });
+    handleConfirmDelete = () => {
+      return api
+        .removeCard(data._id)
+        .then(() => {
+          cardElement.remove();
+          closeModal(confirmModal);
+          handleConfirmDelete = null;
+        })
+        .catch((err) => {
+          console.error("Failed to delete card:", err);
+          throw err;
+        });
+    };
+
+    openModal(confirmModal);
   });
 
   cardImageEl.addEventListener("click", () => {
-    openModal(previewModal);
     previewModalCaption.textContent = data.name;
     previewModalImageEl.src = data.link;
     previewModalImageEl.alt = data.name;
+    openModal(previewModal);
   });
 
   return cardElement;
@@ -128,7 +160,6 @@ function closeModal(modal) {
 
 function handleEscClose(evt) {
   if (evt.key === "Escape") {
-    // Find the open modal and close it
     const openedModal = document.querySelector(".modal_opened");
     if (openedModal) {
       closeModal(openedModal);
@@ -138,7 +169,7 @@ function handleEscClose(evt) {
 
 function handleOverlayClose(evt) {
   if (evt.target === evt.currentTarget) {
-    closeModal(evt.target);
+    closeModal(evt.currentTarget);
   }
 }
 
@@ -199,14 +230,59 @@ function handleAddCardSubmit(evt) {
     });
 }
 
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+
+  const submitButton =
+    evt.submitter || avatarForm.querySelector(".modal__submit-btn");
+  const originalButtonText = submitButton.textContent;
+
+  submitButton.textContent = "Saving...";
+
+  api
+    .updateAvatar({
+      avatar: avatarInput.value,
+    })
+    .then((userData) => {
+      profileAvatar.src = userData.avatar;
+      profileAvatar.alt = userData.name;
+      closeModal(avatarModal);
+      avatarForm.reset();
+    })
+    .catch((err) => {
+      console.error("Failed to update avatar:", err);
+    })
+    .finally(() => {
+      submitButton.textContent = originalButtonText;
+    });
+}
+
+function handleDeleteSubmit(evt) {
+  evt.preventDefault();
+
+  if (!handleConfirmDelete) return;
+
+  const submitButton =
+    evt.submitter || confirmDeleteForm.querySelector(".modal__submit-btn");
+  const originalButtonText = submitButton.textContent;
+
+  submitButton.textContent = "Deleting...";
+
+  handleConfirmDelete().finally(() => {
+    submitButton.textContent = originalButtonText;
+  });
+}
+
 editProfileButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
+
   resetValidation(
     editFormElement,
     [editModalNameInput, editModalDescriptionInput],
     validationConfig,
   );
+
   openModal(editModal);
 });
 
@@ -215,6 +291,8 @@ editModalCloseButton.addEventListener("click", () => {
 });
 
 addProfileButton.addEventListener("click", () => {
+  cardForm.reset();
+  disableButton(cardSubmitButton, validationConfig);
   openModal(cardModal);
 });
 
@@ -226,12 +304,35 @@ previewModalCloseButton.addEventListener("click", () => {
   closeModal(previewModal);
 });
 
+if (profileAvatarEditButton) {
+  profileAvatarEditButton.addEventListener("click", () => {
+    avatarForm.reset();
+    openModal(avatarModal);
+  });
+}
+
+avatarCloseButton.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
+
+confirmDeleteForm.addEventListener("submit", handleDeleteSubmit);
+
+confirmCloseButton.addEventListener("click", () => {
+  closeModal(confirmModal);
+  handleConfirmDelete = null;
+});
+
+confirmCancelButton.addEventListener("click", () => {
+  closeModal(confirmModal);
+  handleConfirmDelete = null;
+});
+
+avatarForm.addEventListener("submit", handleAvatarSubmit);
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
 
-let currentUserId;
-
-Promise.all([api.getUserInfo(), api.getInitialCards()])
+api
+  .getAppInfo()
   .then(([userData, cards]) => {
     currentUserId = userData._id;
 

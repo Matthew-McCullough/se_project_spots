@@ -12,30 +12,63 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>Spots</title>
   </head>
+
   <body>
     <div class="page">
+      <!-- Header -->
       <header class="header">
         <img src="" alt="Spot logo" class="header__logo" />
       </header>
+
+      <!-- Main Content -->
       <main class="content">
+        <!-- Profile Section -->
         <section class="profile page__section">
-          <img src="" alt="Profile avatar" class="profile__avatar" />
+          <!-- Avatar -->
+          <div class="profile__avatar-container">
+            <img src="" alt="Profile avatar" class="profile__avatar" />
+
+            <button
+              type="button"
+              class="profile__avatar-edit-btn"
+              aria-label="Edit profile avatar"
+            >
+              <div class="profile__avatar-overlay">
+                <img
+                  src=""
+                  alt="Edit avatar icon"
+                  class="profile__avatar-edit-icon"
+                />
+                <span class="profile__avatar-edit-text"> Edit Avatar </span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Profile Info -->
           <div class="profile__column">
             <h1 class="profile__name"></h1>
             <p class="profile__description"></p>
+
             <button type="button" class="profile__edit-btn">
-              <img src="" alt="Pencil icon" />Edit Profile
+              <img src="" alt="Pencil icon" />
+              Edit Profile
             </button>
           </div>
+
+          <!-- Add Button -->
           <button type="button" class="profile__add-btn">
-            <img src="" alt="Plus icon" />New Post
+            <img src="" alt="Plus icon" />
+            New Post
           </button>
         </section>
+
+        <!-- Cards Section -->
         <section class="cards page__section">
           <ul class="cards__list">
             <template id="card-template">
               <li class="card">
                 <img class="card__image" src="" alt="" />
+
                 <div class="card__content">
                   <button type="button" class="card__delete-btn"></button>
                   <h2 class="card__title"></h2>
@@ -46,10 +79,13 @@
           </ul>
         </section>
       </main>
+
+      <!-- Footer -->
       <footer class="footer">
         <p class="footer__copyright">2024 &copy; Spots</p>
       </footer>
 
+      <!-- Edit Profile Modal -->
       <div class="modal" id="edit-modal">
         <div class="modal__content">
           <button
@@ -57,7 +93,9 @@
             type="button"
             class="modal__close-btn"
           ></button>
+
           <h2 class="modal__title">Edit profile</h2>
+
           <form
             name="edit-profile"
             class="modal__form"
@@ -78,6 +116,7 @@
               />
               <span id="profile-name-input-error" class="modal__error"></span>
             </label>
+
             <label for="profile-description-input" class="modal__label">
               Description
               <input
@@ -95,11 +134,13 @@
                 class="modal__error"
               ></span>
             </label>
+
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
         </div>
       </div>
 
+      <!-- Add Card Modal -->
       <div class="modal" id="add-card-modal">
         <div class="modal__content">
           <button
@@ -107,7 +148,9 @@
             type="button"
             class="modal__close-btn"
           ></button>
+
           <h2 class="modal__title">New post</h2>
+
           <form
             name="edit-profile"
             class="modal__form"
@@ -126,6 +169,7 @@
               />
               <span id="add-card-link-input-error" class="modal__error"></span>
             </label>
+
             <label for="add-card-name-input" class="modal__label">
               Caption
               <input
@@ -140,24 +184,83 @@
               />
               <span id="add-card-name-input-error" class="modal__error"></span>
             </label>
+
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
         </div>
       </div>
 
+      <!-- Preview Modal -->
       <div class="modal" id="preview-modal">
-        <div class="modal__image-container">
+        <div class="modal__content modal__content_type_preview">
+          <div class="modal__image-container">
+            <button
+              aria-label="Close modal"
+              type="button"
+              class="modal__close-btn modal__close-btn_type_preview"
+            ></button>
+
+            <img class="modal__image" src="" alt="" />
+            <p class="modal__caption"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avatar Modal -->
+      <div class="modal" id="avatar-modal">
+        <div class="modal__content modal__content_type_avatar">
           <button
             aria-label="Close modal"
             type="button"
-            class="modal__close-btn modal__close-btn_type_preview"
+            class="modal__close-btn"
           ></button>
-          <img
-            class="modal__image"
-            src="https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg"
-            alt=""
-          />
-          <p class="modal__caption">Val Thorens</p>
+
+          <h2 class="modal__title">Edit profile avatar</h2>
+
+          <form class="modal__form" name="avatar-form" novalidate>
+            <label class="modal__label">
+              Profile Picture
+              <input
+                id="avatar-input"
+                type="url"
+                name="avatar"
+                class="modal__input"
+                placeholder="Paste the link to an image"
+                required
+              />
+              <span class="modal__error" id="avatar-input-error"></span>
+            </label>
+
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Confirm Delete Modal -->
+      <div class="modal" id="confirm-modal">
+        <div class="modal__content modal__content_type_confirm">
+          <button
+            aria-label="Close modal"
+            type="button"
+            class="modal__close-btn"
+          ></button>
+
+          <h2 class="modal__title modal__title_type_confirm">
+            Are you sure you want to delete this image?
+          </h2>
+
+          <form class="modal__form" id="confirm-delete-form" novalidate>
+            <div class="modal__actions">
+              <button
+                type="submit"
+                class="modal__submit-btn modal__submit-btn_type_delete"
+              >
+                Delete
+              </button>
+
+              <button type="button" class="modal__cancel-btn">Cancel</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

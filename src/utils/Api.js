@@ -23,6 +23,10 @@ export default class Api {
     }).then(this._handleResponse);
   }
 
+  getAppInfo() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  }
+
   editUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
